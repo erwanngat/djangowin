@@ -7,8 +7,10 @@ class Project(models.Model):
     creation_date = models.DateTimeField('creation date')
     end_date = models.DateTimeField('end date')
     is_finished = models.BooleanField(default=False)
+
     def __str__(self):
         return self.name
+
     def length(self):
         if self.end_date:
             time_delta = self.end_date - self.creation_date
@@ -27,5 +29,6 @@ class Task(models.Model):
     creation_date = models.DateTimeField('creation date')
     end_date = models.DateTimeField('end date')
     is_finished = models.BooleanField(default=False)
+
     def __str__(self):
         return self.name
