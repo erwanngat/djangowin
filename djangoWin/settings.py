@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'projects.apps.ProjectsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -77,12 +78,12 @@ WSGI_APPLICATION = 'djangoWin.wsgi.application'
 from .local_settings import *
 # DATABASES = {
 #     'default': {
-#         'ENGINE': "django.db.backends.mysql",
-#         'NAME': "djangoproj",
-#         "USER": "laravel",
+#         'ENGINE': "",
+#         'NAME': "",
+#         "USER": "",
 #         "PASSWORD": "",
-#         "HOST": "127.0.0.1",
-#         "PORT": "3306",
+#         "HOST": "",
+#         "PORT": "",
 #     }
 # }
 
@@ -111,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Paris'
 
 USE_I18N = True
 
