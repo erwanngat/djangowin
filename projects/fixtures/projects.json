@@ -1,0 +1,23 @@
+[
+    {
+        "model": "projects.Project",
+        "pk": 1,
+        "fields": {
+            "name": "Project 1",
+            "creation_date": "2024-01-01 08:00:00",
+            "end_date": "2024-10-01 08:00:00",
+            "is_finished": false
+        }
+    },
+    {
+        "model": "projects.Project",
+        "pk": 2,
+        "fields": {
+            "name": "Project 2",
+            "creation_date": "2024-01-01 08:00:00",
+            "end_date": "2024-10-01 08:00:00",
+            "is_finished": false
+        }
+
+    }
+]

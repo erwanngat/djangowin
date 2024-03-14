@@ -1,0 +1,38 @@
+[
+    {
+        "model": "projects.Task",
+        "pk": 1,
+        "fields": {
+            "name": "Task 1 proj 1",
+            "description": "Desc task 1 proj 1",
+            "creation_date": "2024-01-01 08:00:00",
+            "end_date": "2024-10-01 08:00:00",
+            "is_finished": false,
+            "project_id": 1
+        }
+    },
+    {
+        "model": "projects.Task",
+        "pk": 2,
+        "fields": {
+            "name": "Task 2 proj 1",
+            "description": "Desc task 2 proj 1",
+            "creation_date": "2024-01-01 08:00:00",
+            "end_date": "2024-10-01 08:00:00",
+            "is_finished": true,
+            "project_id": 1
+        }
+    },
+    {
+        "model": "projects.Task",
+        "pk": 3,
+        "fields": {
+            "name": "Task 1 proj 2",
+            "description": "Desc task 1 proj 2",
+            "creation_date": "2024-01-01 08:00:00",
+            "end_date": "2024-10-01 08:00:00",
+            "is_finished": true,
+            "project_id": 2
+        }
+    }
+]
