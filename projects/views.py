@@ -5,6 +5,9 @@ from django.template import loader
 from django.http import Http404
 
 # Create your views here.
+def home(request):
+    return render(request, 'projects/home.html', {})
+
 def index(request):
     projects = Project.objects.all()
     context={
