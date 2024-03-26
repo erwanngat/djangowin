@@ -1,4 +1,10 @@
 <h1>{{ project.name }}</h1>
+<h2> Create a new task</h2>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
 <h2>Tasks : </h2>
 <ul>
 {% for task in project.task_set.all %}
