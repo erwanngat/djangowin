@@ -44,6 +44,7 @@ def create_project(request):
             now = datetime.datetime.now()
             project = Project.objects.create(name=project_name, creation_date=now, end_date=None, description=project_description)
             Users.objects.create(project_id=project.pk, user_id=request.user.id)
+            return HttpResponseRedirect('/projects')
     else:
         form = CreateProjectForm()
     return render(request, 'projects/create_project.html', {"form" : form})
