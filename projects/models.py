@@ -5,8 +5,9 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Project(models.Model):
     name = models.CharField(max_length=200)
+    description = models.CharField(max_length=1000)
     creation_date = models.DateTimeField('creation date')
-    end_date = models.DateTimeField('end date')
+    end_date = models.DateTimeField('end date', null=True)
     is_finished = models.BooleanField(default=False)
 
     def __str__(self):

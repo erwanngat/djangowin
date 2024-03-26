@@ -1,0 +1,7 @@
+<p>form pour créer un proj</p>
+
+<form action="/create-project" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
