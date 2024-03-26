@@ -6,14 +6,16 @@ from django.http import Http404
 from .forms import CreateProjectForm, CreateTaskForm
 from django.utils import timezone
 import datetime
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
 def home(request):
     return render(request, 'projects/home.html', {})
 
+@login_required
 def index(request):
-    projects = Project.objects.all()
+    projects = Project.objects.filter(users__user=request.user) 
     context={
         "projects": projects,
     }
