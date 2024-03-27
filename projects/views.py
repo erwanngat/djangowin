@@ -48,4 +48,3 @@ def create_project(request):
     else:
         form = CreateProjectForm()
     return render(request, 'projects/create_project.html', {"form" : form})
-

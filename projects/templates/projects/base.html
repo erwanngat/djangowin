@@ -47,17 +47,20 @@
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item text-black">
-                <a class="nav-link text-black font-weight-bold" href="{% url 'users:login' %}">login</a>
+                <a class="nav-link text-black font-weight-bold" href="#">A propos</a>
               </li>
               <li class="nav-item text-black">
-                <a class="nav-link text-black font-weight-bold" href="{% url 'users:register' %}">register</a>
+                <a class="nav-link text-black font-weight-bold" href="#">Contact</a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
+      {% block content %}
+
+      {% endblock content %}
       <footer class="py-3 bg-grey">
-        <p>a mettre des trucs la</p>
+
       </footer>
     </body>
     
