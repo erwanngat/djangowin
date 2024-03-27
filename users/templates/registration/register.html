@@ -1,3 +1,6 @@
+{% extends "registration/baseRegis.html" %}
+{% block formRegis %}
+
 <h1>register</h1>
 
 {% if form.errors %}
@@ -14,3 +17,5 @@
     <button type="submit" class="btn btn-primary">register</button>
 
 </form>
+
+{% endblock %}
