@@ -42,27 +42,31 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link lead" href="{% url 'projects:index' %}">Youre projects<span class="sr-only">(current)</span></a>
+            <li class="nav-item">
+              <a class="nav-link lead" href="{% url 'projects:home' %}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link lead" href="#">???????</a>
+              <a class="nav-link lead" href="{% url 'projects:features' %}">Features</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link lead" href="#">Pricing<span class="sr-only">(current)</span></a>
             </li>
           </ul>
           <span class="navbar-text">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item text-black">
-                <a class="nav-link text-black font-weight-bold" href="{% url 'users:logout' %}">Logout</a>
+                <a class="nav-link text-white font-weight-bold lead" href="{% url 'users:login' %}">login</a>
+              </li>
+              <li class="nav-item text-black">
+                <a class="nav-link text-white font-weight-bold lead" href="{% url 'users:register' %}">register</a>
               </li>
             </ul>
           </span>
         </div>
       </nav>
-      {% block content %}
-
-      {% endblock content %}
+pricing
       <footer class="py-3 bg-grey">
-
+        <p>a mettre des trucs la</p>
       </footer>
     </body>
     

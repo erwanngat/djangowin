@@ -16,10 +16,12 @@ def home(request):
 @login_required
 def index(request):
     projects = Project.objects.filter(users__user=request.user) 
-    context={
+    username = request.user.username
+    data={
         "projects": projects,
+        "username": username,
     }
-    return render(request, "projects/index.html", context)
+    return render(request, "projects/index.html", data)
 
 def detail(request, project_id):
     project = get_object_or_404(Project, id=project_id)
@@ -48,3 +50,9 @@ def create_project(request):
     else:
         form = CreateProjectForm()
     return render(request, 'projects/create_project.html', {"form" : form})
+
+def features(request):
+    return render(request, 'projects/features.html', {})
+
+def pricing(request):
+    return render(request, 'projects/pricing.html', {})

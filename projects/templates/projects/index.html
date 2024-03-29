@@ -1,9 +1,11 @@
 {% extends "projects/base.html" %}
 {% block content %}
 
+<h1 class='text-center m-5'>Welcome to your dashboard {{ username }}</h1>
 <a href="{% url 'projects:create_project' %}">Create a new project</a>
 
 {% if projects %}
+<h1>All your projects</h1>
     <ul>
     {% for project in projects %}
         <li><a href="{% url 'projects:detail' project.id %}">{{ project.name }}</a></li>
