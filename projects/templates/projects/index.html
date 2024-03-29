@@ -4,8 +4,8 @@
 <h1 class='text-center m-5'>Welcome to your dashboard {{ username }}</h1>
 
 
+<h1 class='text-center mb-4'>All your projects <a href="{% url 'projects:create_project' %}"%>+</a></h1>
 {% if projects %}
-<h1 class='text-center mb-4'>All your projects <a href="{% url 'projects:create_project' %}">+</a></h1>
 
 <div class='container'>
     <table class="table">
@@ -26,9 +26,9 @@
                     <td>{{ project.creation_date }}</td>
                     <td>{{ project.end_date }}</td>
                     {% if project.is_finished %}
-                        <td>Valider</td>
+                        <td>Finish</td>
                     {% else %}
-                        <td><a href="{% url 'projects:is_finished' project.id %}"><input type="checkbox"/></a></td>
+                        <td><a  href="{% url 'projects:is_finished' project.id %}"><i class="ri-square-line"></i></a></td>
                     {% endif %}
                     </td>
                 </tr>
@@ -36,7 +36,7 @@
         </tbody>
     </table>
     {% else %}
-        <p>No projects are available.</p>
+        <h2 class="text-center">No projects are available.</h2>
     {% endif %}
 </div>
 

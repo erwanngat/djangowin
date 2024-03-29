@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from .models import Project, Users, Task
 from django.template import loader
@@ -58,4 +58,5 @@ def pricing(request):
     return render(request, 'projects/pricing.html', {})
 
 def is_finished(request, project_id):
-    Project.objects.filter(pk=project_id).update(end_date=datetime.datetime.now() a finir)
+    Project.objects.filter(pk=project_id).update(end_date=datetime.datetime.now(), is_finished=True)
+    return redirect('projects:index')
