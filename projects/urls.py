@@ -11,4 +11,5 @@ urlpatterns = [
     path('create-task', views.create_project, name="create_task"),
     path('features', views.features, name='features'),
     path('pricing', views.pricing, name='pricing'),
+    path('is_finished/<int:project_id>', views.is_finished, name='is_finished'),
 ]

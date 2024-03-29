@@ -56,3 +56,6 @@ def features(request):
 
 def pricing(request):
     return render(request, 'projects/pricing.html', {})
+
+def is_finished(request, project_id):
+    Project.objects.filter(pk=project_id).update(end_date=datetime.datetime.now() a finir)

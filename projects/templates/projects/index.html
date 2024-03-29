@@ -2,17 +2,42 @@
 {% block content %}
 
 <h1 class='text-center m-5'>Welcome to your dashboard {{ username }}</h1>
-<a href="{% url 'projects:create_project' %}">Create a new project</a>
+
 
 {% if projects %}
-<h1>All your projects</h1>
-    <ul>
-    {% for project in projects %}
-        <li><a href="{% url 'projects:detail' project.id %}">{{ project.name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No projects are available.</p>
-{% endif %}
+<h1 class='text-center mb-4'>All your projects <a href="{% url 'projects:create_project' %}">+</a></h1>
+
+<div class='container'>
+    <table class="table">
+        <thead style="background-color: #007bff;">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Creation date</th>
+                <th scope="col">End date</th>
+                <th scope="col">Is finished</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in projects %}
+                <tr>
+                    <td><a href="{% url 'projects:detail' project.id %}">{{ project.name }}</a></td>
+                    <td>{{ project.description }}</td>
+                    <td>{{ project.creation_date }}</td>
+                    <td>{{ project.end_date }}</td>
+                    {% if project.is_finished %}
+                        <td>Valider</td>
+                    {% else %}
+                        <td><a href="{% url 'projects:is_finished' project.id %}"><input type="checkbox"/></a></td>
+                    {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No projects are available.</p>
+    {% endif %}
+</div>
 
 {%endblock%}
