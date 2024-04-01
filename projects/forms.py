@@ -9,5 +9,4 @@ class CreateProjectForm(forms.Form):
 class CreateTaskForm(forms.Form):
     task_name = forms.CharField(label="Task name", max_length=100)
     task_description = forms.CharField(label="Task description", max_length=1000)
-    task_creation_date = forms.DateField(label="start date", initial=datetime.date.today)
-    task_end_date = forms.DateField(label="end date", initial=datetime.date.today)
+    task_end_date = forms.DateTimeField(label="end date", initial=datetime.datetime.today)

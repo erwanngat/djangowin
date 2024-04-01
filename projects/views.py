@@ -7,6 +7,7 @@ from .forms import CreateProjectForm, CreateTaskForm
 from django.utils import timezone
 import datetime
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 
 # Create your views here.
@@ -25,17 +26,17 @@ def index(request):
 
 def detail(request, project_id):
     project = get_object_or_404(Project, id=project_id)
+    now = datetime.datetime.now()
     if request.method == 'POST':
         form = CreateTaskForm(request.POST)
         if form.is_valid():
             task_name = form.cleaned_data['task_name']
             task_description = form.cleaned_data['task_description']
-            task_creation_date = form.cleaned_data['task_creation_date']
             task_end_date = form.cleaned_data['task_end_date']
-            Task.objects.create(name=task_name, description=task_description, creation_date=task_creation_date, end_date=task_end_date, project_id=project_id)
+            Task.objects.create(name=task_name, description=task_description, creation_date=datetime.datetime.now(), end_date=task_end_date, project_id=project_id)
     else:
         form = CreateTaskForm()
-    return render(request, 'projects/detail.html', {"project": project, "form" : form})
+    return render(request, 'projects/detail.html', {"project": project, "form" : form, "now" : now})
 
 def create_project(request):
     if request.method == 'POST':
@@ -59,4 +60,16 @@ def pricing(request):
 
 def is_finished(request, project_id):
     Project.objects.filter(pk=project_id).update(end_date=datetime.datetime.now(), is_finished=True)
+    return redirect('projects:index')
+
+def task_is_finished(request, project_id, task_id):
+    Task.objects.filter(pk=task_id).update(end_date=datetime.datetime.now(), is_finished=True)
+    return redirect('/project/' + str(project_id))
+
+def delete_task(request, project_id, task_id):
+    Task.objects.filter(pk=task_id).delete()
+    return redirect('/project/' + str(project_id))
+
+def delete_project(request, project_id):
+    Project.objects.filter(pk=project_id).delete()
     return redirect('projects:index')

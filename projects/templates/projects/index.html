@@ -16,11 +16,12 @@
                 <th scope="col">Creation date</th>
                 <th scope="col">End date</th>
                 <th scope="col">Is finished</th>
+                <th scope="col">Delete</th>
             </tr>
         </thead>
         <tbody>
             {% for project in projects %}
-                <tr>
+                <tr {% if project.is_finished %}style='background-color: #006400;'{% endif %}>
                     <td><a href="{% url 'projects:detail' project.id %}">{{ project.name }}</a></td>
                     <td>{{ project.description }}</td>
                     <td>{{ project.creation_date }}</td>
@@ -31,6 +32,7 @@
                         <td><a  href="{% url 'projects:is_finished' project.id %}"><i class="ri-square-line"></i></a></td>
                     {% endif %}
                     </td>
+                    <td><a href="{% url 'projects:delete_project' project.id %}">Delete project</a></td>
                 </tr>
             {% endfor %}
         </tbody>

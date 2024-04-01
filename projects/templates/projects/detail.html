@@ -1,14 +1,51 @@
-<h1>{{ project.name }}</h1>
-<h2> Create a new task</h2>
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit">
-</form>
-<h2>Tasks : </h2>
-<ul>
-{% for task in project.task_set.all %}
-    <li>{{ task.name }}</li>
-    <li>{{ task.description }}</li>
-{% endfor %}
-</ul>
+{% extends "projects/base.html" %}
+{% block content %}
+
+<div class='container'>
+    <h1 class='text-center m-4'>Project : {{ project.name }}</h1>
+    <h2 class='text-center m-4'> Create a new task</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <p>{{ field.label }} :
+        {{ field }}</p>
+        {% endfor %}
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary mt-4">Create task</button>
+        </div>
+    </form>
+    {% if project.task_set.all %}
+    <table class="table">
+        <thead style="background-color: #007bff;">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Start date</th>
+                <th scope="col">End date</th>
+                <th scope="col">Finished ?</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in project.task_set.all %}
+                <tr {% if task.is_finished %}style='background-color: #006400;'{% endif %} {% if task.is_past %}style='background-color: red;'{% endif %}>
+                    <td>{{ task.name }}</a></td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.creation_date }}</td>
+                    <td>{{ task.end_date }}</td>
+                    {% if task.is_finished %}
+                        <td>Finish</td>
+                    {% else %}
+                        <td><a  href="{% url 'projects:task_is_finished' project.id task.id %}"><i class="ri-square-line"></i></a></td>
+                    {% endif %}
+                    </td>
+                    <td><a href="{% url 'projects:delete_task' project.id task.id %}">delete task</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <h2 class="text-center">No tasks available.</h2>
+    {% endif %}
+</div>
+{%endblock%}

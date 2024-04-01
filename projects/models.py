@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+import datetime
 
 # Create your models here.
 class Project(models.Model):
@@ -28,12 +29,15 @@ class Task(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=1000)
-    creation_date = models.DateTimeField('creation date')
-    end_date = models.DateTimeField('end date')
+    creation_date = models.DateTimeField('creation date', default=datetime.datetime.now())
+    end_date = models.DateTimeField('end date', default=datetime.datetime.now())
     is_finished = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
+
+    def is_past(self):
+        return datetime.datetime.now().timestamp() > self.end_date.timestamp()
 
 class Users(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
