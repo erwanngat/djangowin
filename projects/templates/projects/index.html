@@ -24,11 +24,7 @@
                     <td><a href="{% url 'projects:detail' project.id %}">{{ project.name }}</a></td>
                     <td>{{ project.description }}</td>
                     <td>{{ project.creation_date }}</td>
-                    {% if project.end_date == None %}
-                        <td>Not finished yet</td>
-                    {% else %}
-                        <td>{{ project.end_date }}</td>
-                    {% endif %}
+                    <td>{{ project.end_date|default:"Not finished yet" }}</td>
                     {% if project.is_finished %}
                         <td>Finish</td>
                     {% else %}
