@@ -1,8 +1,15 @@
 {% extends "projects/base.html" %}
 {% block content %}
 
+<style>
+    .clickable {
+        cursor: pointer;
+        text-decoration: none;
+    }
+</style>
+
 <div class='container'>
-    <h1 class='text-center m-4'>Project : {{ project.name }}</h1>
+    <h1 class='text-center m-4'>Project : {{ project.name }} / <a  href="{% url 'projects:project_edit' project.id %}"> Edit</a></h1>
     <h2 class='text-center m-4'> Create a new task</h2>
     <form action="" method="post">
         {% csrf_token %}
@@ -28,7 +35,7 @@
         </thead>
         <tbody>
             {% for task in project.task_set.all %}
-                <tr {% if task.is_finished %}style='background-color: #006400;'{% endif %} {% if task.is_past %}style='background-color: red;'{% endif %}>
+                <tr {% if task.is_finished %}style='background-color: #87E990;'{% endif %} {% if task.is_past %}style='background-color: #f67280;'{% endif %}>
                     <td>{{ task.name }}</a></td>
                     <td>{{ task.description }}</td>
                     <td>{{ task.creation_date }}</td>
@@ -39,7 +46,10 @@
                         <td><a  href="{% url 'projects:task_is_finished' project.id task.id %}"><i class="ri-square-line"></i></a></td>
                     {% endif %}
                     </td>
-                    <td><a href="{% url 'projects:delete_task' project.id task.id %}">delete task</a></td>
+                    <td>
+                        <p class='text-primary pe-auto clickable'>delete task</p>
+                        <p style="display: none;" class="confirmation-text"><a href="{% url 'projects:delete_task' project.id  task.id%}">Confirm ?</a></p>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -48,4 +58,17 @@
         <h2 class="text-center">No tasks available.</h2>
     {% endif %}
 </div>
+
+<script>
+    const clickableElements = document.querySelectorAll(".clickable");
+
+    clickableElements.forEach(element => {
+      element.addEventListener("click", () => {
+        const tdElement = element.parentElement;
+    
+        const confirmationText = tdElement.querySelector(".confirmation-text");
+        confirmationText.style.display = "block";
+      });
+    });
+</script>
 {%endblock%}

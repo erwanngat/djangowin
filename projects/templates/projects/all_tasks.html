@@ -1,6 +1,13 @@
 {% extends "projects/base.html" %}
 {% block content %}
 
+<style>
+    .clickable {
+        cursor: pointer;
+        text-decoration: none;
+    }
+</style>
+
 <h1 class='text-center m-4'> All my tasks</h1>
 {% if tasks %}
     <div class='container'>
@@ -17,7 +24,7 @@
             </thead>
             <tbody>
                 {% for task in tasks %}
-                    <tr {% if task.is_finished %}style='background-color: #006400;'{% endif %} {% if task.is_past %}style='background-color: red;'{% endif %}>
+                    <tr {% if task.is_finished %}style='background-color: #87E990;'{% endif %} {% if task.is_past %}style='background-color: #f67280;'{% endif %}>
                         <td>{{ task.name }}</td>
                         <td>{{ task.description }}</td>
                         <td>{{ task.creation_date }}</td>
@@ -28,7 +35,10 @@
                             <td><a  href="{% url 'projects:task_is_finished_a' task.id %}"><i class="ri-square-line"></i></a></td>
                         {% endif %}
                         </td>
-                        <td><a href="{% url 'projects:delete_task_a' task.id %}">Delete task</a></td>
+                        <td>
+                            <p class='text-primary pe-auto clickable'>Delete task</p>
+                            <p style="display: none;" class="confirmation-text"><a href="{% url 'projects:delete_task_a' task.id %}">Confirm ?</a></p>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -38,4 +48,17 @@
         {% endif %}
     </div>
 
+    <script>
+        const clickableElements = document.querySelectorAll(".clickable");
+    
+        clickableElements.forEach(element => {
+          element.addEventListener("click", () => {
+            const tdElement = element.parentElement;
+        
+            const confirmationText = tdElement.querySelector(".confirmation-text");
+            confirmationText.style.display = "block";
+          });
+        });
+    </script>
+    
 {%endblock%}

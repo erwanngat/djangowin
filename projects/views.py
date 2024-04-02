@@ -1,13 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from .models import Project, Users, Task
-from django.template import loader
-from django.http import Http404
 from .forms import CreateProjectForm, CreateTaskForm
-from django.utils import timezone
 import datetime
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
 
 
 # Create your views here.
@@ -86,3 +82,15 @@ def all_tasks(request):
     projects = Project.objects.filter(users__user=request.user) 
     tasks = Task.objects.filter(project__in=projects) 
     return render(request, 'projects/all_tasks.html', {'tasks': tasks})
+
+def project_edit(request, project_id):
+    project = get_object_or_404(Project, id=project_id)
+    if request.method == 'POST':
+        project_name = request.POST.get['project_name']
+        project_description = request.POST.get['project_description']
+        project_creation_date = request.POST.get['project_cration_date']
+        project_end_date = request.POST.get['project_end_date']
+        project_is_finished = request.POST.get['project_is_finished']
+        Project.objects.update(name=project_name, description=project_description, creation_date=project_creation_date, end_date=project_end_date, is_finished=project_is_finished)
+    else:
+        return render(request, 'projects/project_edit.html', {'project': project})

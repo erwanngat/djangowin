@@ -1,6 +1,13 @@
 {% extends "projects/base.html" %}
 {% block content %}
 
+<style>
+    .clickable {
+        cursor: pointer;
+        text-decoration: none;
+    }
+</style>
+
 <h1 class='text-center m-5'>Welcome to your dashboard {{ username }}</h1>
 
 
@@ -21,7 +28,7 @@
             </thead>
             <tbody>
                 {% for project in projects %}
-                    <tr {% if project.is_finished %}style='background-color: #006400;'{% endif %}>
+                    <tr {% if project.is_finished %}style='background-color: #87E990 ;'{% endif %}>
                         <td><a href="{% url 'projects:detail' project.id %}">{{ project.name }}</a></td>
                         <td>{{ project.description }}</td>
                         <td>{{ project.creation_date }}</td>
@@ -32,7 +39,10 @@
                             <td><a  href="{% url 'projects:is_finished' project.id %}"><i class="ri-square-line"></i></a></td>
                         {% endif %}
                         </td>
-                        <td><a href="{% url 'projects:delete_project' project.id %}">Delete project</a></td>
+                        <td>
+                            <p class='text-primary pe-auto clickable'>Delete project</p>
+                            <p style="display: none;" class="confirmation-text"><a href="{% url 'projects:delete_project' project.id %}">Confirm ?</a></p>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -41,5 +51,18 @@
             <h2 class="text-center">No projects are available.</h2>
         {% endif %}
     </div>
+
+    <script>
+        const clickableElements = document.querySelectorAll(".clickable");
+
+        clickableElements.forEach(element => {
+          element.addEventListener("click", () => {
+            const tdElement = element.parentElement;
+        
+            const confirmationText = tdElement.querySelector(".confirmation-text");
+            confirmationText.style.display = "block";
+          });
+        });
+    </script>
 
 {%endblock%}
