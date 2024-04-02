@@ -9,12 +9,8 @@ def login_user(request):
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('/users/login')
-        else:
-            messages.success(request, ('There was an error'))
-            return redirect('login')
+        login(request, user)
+        return redirect('/users/login')
     else:
         return render(request, 'registration/login.html', {})
 
@@ -31,7 +27,6 @@ def register_user(request):
             return redirect('projects:index')
     else:
         form = UserCreationForm()
-
     return render(request, 'registration/register.html', {'form':form,})
 
 def logout_user(request):
