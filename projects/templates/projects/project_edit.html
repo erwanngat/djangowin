@@ -2,40 +2,34 @@
 {% block content %}
 
 <h1 class='text-center m-4'>Edit : {{ project.name }}</h1>
-
 <div class='container'>
     <form action="{% url 'projects:project_edit' project.id %}" method='POST'>
         {% csrf_token %}
         <div class="form-outline mb-4">
             <label>Project name :</label>
             <input type="text" class="form-control form-control-lg"
-            value="{{ project.name }}" name="project-name" />
+            value="{{ project.name }}" name="project_name"/>
         </div>
 
         <div class="form-outline mb-4">
             <label>Project description :</label>
             <input type="text" class="form-control form-control-lg"
-            value="{{ project.description }}" name="project-description" />
+            value="{{ project.description }}" name="project_description" />
         </div>
 
         <div class="form-outline mb-4">
             <label>Project creation date :</label>
             <input type="text" class="form-control form-control-lg"
-            value="{{ project.creation_date }}" name="project-creation_date" />
+            value="{{ project.creation_date|date:'Y-m-d H:i:s' }}" name="project_creation_date" />
         </div>
 
+        {% if project.is_finished %}
         <div class="form-outline mb-4">
             <label>Project end date :</label>
             <input type="text" class="form-control form-control-lg"
-            value="{{ project.end_date }}" name="project-end_date" />
+            value="{{ project.end_date|date:'Y-m-d H:i:s' }}" name="project_end_date" />
         </div>
-
-        <div class="form-outline mb-4">
-            <label>Project is finished :</label>
-            <input type="checkbox" class="form-control form-control-lg"
-            name="project-is_finished" style='height: 1.5rem; width: 1.5rem;' {% if project.is_finished %} checked {% endif %}/>
-        </div>
-
+        {% endif %}
         <div class='text-center'>
             <button type="input" class="btn btn-primary btn-lg"
             style="padding-left: 2.5rem; padding-right: 2.5rem;">Edit</button>

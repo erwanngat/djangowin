@@ -86,11 +86,13 @@ def all_tasks(request):
 def project_edit(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     if request.method == 'POST':
-        project_name = request.POST.get['project_name']
-        project_description = request.POST.get['project_description']
-        project_creation_date = request.POST.get['project_cration_date']
-        project_end_date = request.POST.get['project_end_date']
-        project_is_finished = request.POST.get['project_is_finished']
-        Project.objects.update(name=project_name, description=project_description, creation_date=project_creation_date, end_date=project_end_date, is_finished=project_is_finished)
-    else:
-        return render(request, 'projects/project_edit.html', {'project': project})
+        project_name = request.POST['project_name']
+        project_description = request.POST['project_description']
+        project_creation_date = request.POST['project_creation_date']
+        if project.is_finished:
+            project_end_date = request.POST['project_end_date']
+            Project.objects.filter(pk=project_id).update(name=project_name, description=project_description, creation_date=project_creation_date, end_date=project_end_date)
+        else:
+            Project.objects.filter(pk=project_id).update(name=project_name, description=project_description, creation_date=project_creation_date)
+        return redirect('projects:project_edit', project_id)
+    return render(request, 'projects/project_edit.html', {'project': project})
