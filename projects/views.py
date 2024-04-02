@@ -66,10 +66,23 @@ def task_is_finished(request, project_id, task_id):
     Task.objects.filter(pk=task_id).update(end_date=datetime.datetime.now(), is_finished=True)
     return redirect('/project/' + str(project_id))
 
+def task_is_finished_a(request, task_id):
+    Task.objects.filter(pk=task_id).update(end_date=datetime.datetime.now(), is_finished=True)
+    return redirect('projects:all_tasks')
+
 def delete_task(request, project_id, task_id):
     Task.objects.filter(pk=task_id).delete()
     return redirect('/project/' + str(project_id))
 
+def delete_task_a(request, task_id):
+    Task.objects.filter(pk=task_id).delete()
+    return redirect('projects:all_tasks')
+
 def delete_project(request, project_id):
     Project.objects.filter(pk=project_id).delete()
     return redirect('projects:index')
+
+def all_tasks(request):
+    projects = Project.objects.filter(users__user=request.user) 
+    tasks = Task.objects.filter(project__in=projects) 
+    return render(request, 'projects/all_tasks.html', {'tasks': tasks})

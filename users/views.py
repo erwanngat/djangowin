@@ -10,7 +10,7 @@ def login_user(request):
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
         login(request, user)
-        return redirect('/users/login')
+        return redirect('projects:index')
     else:
         return render(request, 'registration/login.html', {})
 

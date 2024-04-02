@@ -7,39 +7,39 @@
 <h1 class='text-center mb-4'>All your projects <a href="{% url 'projects:create_project' %}"%>+</a></h1>
 {% if projects %}
 
-<div class='container'>
-    <table class="table">
-        <thead style="background-color: #007bff;">
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Creation date</th>
-                <th scope="col">End date</th>
-                <th scope="col">Is finished</th>
-                <th scope="col">Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for project in projects %}
-                <tr {% if project.is_finished %}style='background-color: #006400;'{% endif %}>
-                    <td><a href="{% url 'projects:detail' project.id %}">{{ project.name }}</a></td>
-                    <td>{{ project.description }}</td>
-                    <td>{{ project.creation_date }}</td>
-                    <td>{{ project.end_date|default:"Not finished yet" }}</td>
-                    {% if project.is_finished %}
-                        <td>Finish</td>
-                    {% else %}
-                        <td><a  href="{% url 'projects:is_finished' project.id %}"><i class="ri-square-line"></i></a></td>
-                    {% endif %}
-                    </td>
-                    <td><a href="{% url 'projects:delete_project' project.id %}">Delete project</a></td>
+    <div class='container'>
+        <table class="table">
+            <thead style="background-color: #007bff;">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Creation date</th>
+                    <th scope="col">End date</th>
+                    <th scope="col">Is finished</th>
+                    <th scope="col">Delete</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-        <h2 class="text-center">No projects are available.</h2>
-    {% endif %}
-</div>
+            </thead>
+            <tbody>
+                {% for project in projects %}
+                    <tr {% if project.is_finished %}style='background-color: #006400;'{% endif %}>
+                        <td><a href="{% url 'projects:detail' project.id %}">{{ project.name }}</a></td>
+                        <td>{{ project.description }}</td>
+                        <td>{{ project.creation_date }}</td>
+                        <td>{{ project.end_date|default:"Not finished yet" }}</td>
+                        {% if project.is_finished %}
+                            <td>Finish</td>
+                        {% else %}
+                            <td><a  href="{% url 'projects:is_finished' project.id %}"><i class="ri-square-line"></i></a></td>
+                        {% endif %}
+                        </td>
+                        <td><a href="{% url 'projects:delete_project' project.id %}">Delete project</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <h2 class="text-center">No projects are available.</h2>
+        {% endif %}
+    </div>
 
 {%endblock%}
