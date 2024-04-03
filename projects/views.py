@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     return render(request, 'projects/home.html', {})
 
-@login_required
+@login_required(login_url="users/login_user")
 def index(request):
     projects = Project.objects.filter(users__user=request.user) 
     username = request.user.username
@@ -20,6 +20,7 @@ def index(request):
     }
     return render(request, "projects/index.html", data)
 
+@login_required(login_url="users/login_user")
 def detail(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     now = datetime.datetime.now()
@@ -34,6 +35,7 @@ def detail(request, project_id):
         form = CreateTaskForm()
     return render(request, 'projects/detail.html', {"project": project, "form" : form, "now" : now})
 
+@login_required(login_url="users/login_user")
 def create_project(request):
     if request.method == 'POST':
         form = CreateProjectForm(request.POST)
@@ -54,35 +56,43 @@ def features(request):
 def pricing(request):
     return render(request, 'projects/pricing.html', {})
 
+@login_required(login_url="users/login_user")
 def is_finished(request, project_id):
     Project.objects.filter(pk=project_id).update(end_date=datetime.datetime.now(), is_finished=True)
     return redirect('projects:index')
 
+@login_required(login_url="users/login_user")
 def task_is_finished(request, project_id, task_id):
     Task.objects.filter(pk=task_id).update(end_date=datetime.datetime.now(), is_finished=True)
     return redirect('/project/' + str(project_id))
 
+@login_required(login_url="users/login_user")
 def task_is_finished_a(request, task_id):
     Task.objects.filter(pk=task_id).update(end_date=datetime.datetime.now(), is_finished=True)
     return redirect('projects:all_tasks')
 
+@login_required(login_url="users/login_user")
 def delete_task(request, project_id, task_id):
     Task.objects.filter(pk=task_id).delete()
     return redirect('/project/' + str(project_id))
 
+@login_required(login_url="users/login_user")
 def delete_task_a(request, task_id):
     Task.objects.filter(pk=task_id).delete()
     return redirect('projects:all_tasks')
 
+@login_required(login_url="users/login_user")
 def delete_project(request, project_id):
     Project.objects.filter(pk=project_id).delete()
     return redirect('projects:index')
 
+@login_required(login_url="users/login_user")
 def all_tasks(request):
     projects = Project.objects.filter(users__user=request.user) 
     tasks = Task.objects.filter(project__in=projects) 
     return render(request, 'projects/all_tasks.html', {'tasks': tasks})
 
+@login_required(login_url="users/login_user")
 def project_edit(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     if request.method == 'POST':
@@ -97,6 +107,7 @@ def project_edit(request, project_id):
         return redirect('projects:project_edit', project_id)
     return render(request, 'projects/project_edit.html', {'project': project})
 
+@login_required(login_url="users/login_user")
 def task_edit(request, task_id):
     task = get_object_or_404(Task, id=task_id)
     if request.method == 'POST':
