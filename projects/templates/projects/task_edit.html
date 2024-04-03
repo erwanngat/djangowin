@@ -2,38 +2,38 @@
 {% block content %}
 
 <div class="text-lg-start mt-4 pt-2 ml-4 pl-3">
-    <a href="{% url 'projects:detail' project.id%}">
+    <a href="{% url 'projects:all_tasks' %}">
         <button type="input" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Back</button>
     </a>
 </div>
 
-<h1 class='text-center m-4'>Edit : {{ project.name }}</h1>
+<h1 class='text-center m-4'>Edit : {{ task.name }}</h1>
 <div class='container'>
-    <form action="{% url 'projects:project_edit' project.id %}" method='POST'>
+    <form action="{% url 'projects:task_edit' task.id %}" method='POST'>
         {% csrf_token %}
         <div class="form-outline mb-4">
-            <label>Project name :</label>
+            <label>Task name :</label>
             <input type="text" class="form-control form-control-lg"
-            value="{{ project.name }}" name="project_name"/>
+            value="{{ task.name }}" name="task_name"/>
         </div>
 
         <div class="form-outline mb-4">
-            <label>Project description :</label>
+            <label>Task description :</label>
             <input type="text" class="form-control form-control-lg"
-            value="{{ project.description }}" name="project_description" />
+            value="{{ task.description }}" name="task_description" />
         </div>
 
         <div class="form-outline mb-4">
-            <label>Project creation date :</label>
+            <label>Task creation date :</label>
             <input type="text" class="form-control form-control-lg"
-            value="{{ project.creation_date|date:'Y-m-d H:i:s' }}" name="project_creation_date" />
+            value="{{ task.creation_date|date:'Y-m-d H:i:s' }}" name="task_creation_date" />
         </div>
 
-        {% if project.is_finished %}
+        {% if task.is_finished %}
         <div class="form-outline mb-4">
-            <label>Project end date :</label>
+            <label>Task end date :</label>
             <input type="text" class="form-control form-control-lg"
-            value="{{ project.end_date|date:'Y-m-d H:i:s' }}" name="project_end_date" />
+            value="{{ task.end_date|date:'Y-m-d H:i:s' }}" name="task_end_date" />
         </div>
         {% endif %}
         <div class='text-center'>

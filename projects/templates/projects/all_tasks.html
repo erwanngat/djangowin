@@ -25,7 +25,7 @@
             <tbody>
                 {% for task in tasks %}
                     <tr {% if task.is_finished %}style='background-color: #87E990;'{% endif %} {% if task.is_past %}style='background-color: #f67280;'{% endif %}>
-                        <td>{{ task.name }}</td>
+                        <td><a href="{% url 'projects:task_edit' task.id %}">{{ task.name }}</a></td>
                         <td>{{ task.description }}</td>
                         <td>{{ task.creation_date }}</td>
                         <td>{{ task.end_date|default:"Not finished yet" }}</td>
@@ -37,7 +37,7 @@
                         </td>
                         <td>
                             <p class='text-primary pe-auto clickable'>Delete task</p>
-                            <p style="display: none;" class="confirmation-text"><a href="{% url 'projects:delete_task_a' task.id %}">Confirm ?</a></p>
+                            <i style="display: none;" class="confirmation-text"><a href="{% url 'projects:delete_task_a' task.id %}">Confirm ?</a></i>
                         </td>
                     </tr>
                 {% endfor %}

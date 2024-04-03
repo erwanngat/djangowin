@@ -8,6 +8,12 @@
     }
 </style>
 
+<div class="text-lg-start mt-4 pt-2 ml-4 pl-3">
+    <a href="{% url 'projects:index' %}">
+        <button type="input" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Back</button>
+    </a>
+</div>
+
 <div class='container'>
     <h1 class='text-center m-4'>Project : {{ project.name }} / <a  href="{% url 'projects:project_edit' project.id %}"> Edit</a></h1>
     <h2 class='text-center m-4'> Create a new task</h2>
@@ -36,7 +42,7 @@
         <tbody>
             {% for task in project.task_set.all %}
                 <tr {% if task.is_finished %}style='background-color: #87E990;'{% endif %} {% if task.is_past %}style='background-color: #f67280;'{% endif %}>
-                    <td>{{ task.name }}</a></td>
+                    <td><a  href="{% url 'projects:task_edit' task.id %}">{{ task.name }}</a></td>
                     <td>{{ task.description }}</td>
                     <td>{{ task.creation_date }}</td>
                     <td>{{ task.end_date }}</td>
@@ -48,7 +54,7 @@
                     </td>
                     <td>
                         <p class='text-primary pe-auto clickable'>delete task</p>
-                        <p style="display: none;" class="confirmation-text"><a href="{% url 'projects:delete_task' project.id  task.id%}">Confirm ?</a></p>
+                        <i style="display: none;" class="confirmation-text"><a href="{% url 'projects:delete_task' project.id  task.id%}">Confirm ?</a></i>
                     </td>
                 </tr>
             {% endfor %}
