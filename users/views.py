@@ -28,8 +28,7 @@ def register_user(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form':form,})
-
-    
+  
 
 def logout_user(request):
     logout(request)
