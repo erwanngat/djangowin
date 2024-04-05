@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 
@@ -65,22 +66,33 @@
       </span>
     </div>
   </nav>
-  <h1 class='text-center m-4'>Welcome to our projects gestionnary</h1>
-  <span class='m-4'/>
-  <h3 class='text-center m-4'>Work faster and smarter.</h3>
-  <h4 class='text-center m-4'>Keep a clear view of goals and maximize the impact of your work at scale by connecting your tasks with your different projects.</h4>
-  <span class='m-4'/>
-  <div class="text-lg-start mt-4 pt-2 text-center">
-    <a href="{% url 'users:register' %}">
-        <button type="input" class="btn btn-primary btn-lg gap-4" style="padding-left: 2.5rem; padding-right: 2.5rem;">Start</button>
-    </a>
-    <span class='m-4'></span>
-    <span class='m-4'></span>
-    <a href="{% url 'projects:features' %}">
-      <button type="input" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Features</button>
-    </a>
-  </div>
 
+<div class='container'>
+  <div class="row mt-4 pt-2">
+    <div class="col-lg-6">
+      <h1 class='text-center m-4'>Welcome to our projects gestionnary</h1>
+      <span class='m-4'/>
+      <h3 class='text-center m-4'>Work faster and smarter.</h3>
+      <h4 class='text-center m-4'>Keep a clear view of goals and maximize the impact of your work at scale by connecting your tasks with your different projects.</h4>
+      <span class='m-4'/>
+
+      <div class="text-lg-start mt-4 pt-2 text-center">
+        <a href="{% url 'users:register' %}">
+            <button type="input" class="btn btn-primary btn-lg gap-4" style="padding-left: 2.5rem; padding-right: 2.5rem;">Start</button>
+        </a>
+        <span class='m-4'></span>
+        <span class='m-4'></span>
+        <a href="{% url 'projects:features' %}">
+          <button type="input" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Features</button>
+        </a>
+      </div>
+    </div>
+          
+    <div class="col-lg-6">
+      <img src="{% static "images/hero-img.png" %}" alt="Mon image" /> 
+    </div>
+  </div>
+</div>
 
   <footer class="text-center text-lg-start text-white" style="background-color: #1c2331; width:100%;">
     <section class="mt-4">
