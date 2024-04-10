@@ -17,7 +17,7 @@ It includes:
 ## Installation
 ```bash
 # Clone this repository
-$ git clone https://github.com/erwanngat/LaravelShoe
+$ git clone https://github.com/erwanngat/djangowin
 
 # Go into the repository
 $ cd djangowin
