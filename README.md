@@ -1,6 +1,6 @@
-# Shoe sales website 
+# Projects manager site
 
-## This project is a website for selling shoes, with ***user management***.
+## This project is a website for managing your projects
 
 This project was made in Python v3.12.2 using Django framework v5.0.3 and Bootstrap framework v5.0.
 It includes:
