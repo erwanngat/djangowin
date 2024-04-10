@@ -21,7 +21,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-n+_+v5so)cs%k)=_e&4a)#ub$f*m-99e4cwf&2c+v%0rks=)go'
+
+#-------------SECRET KEY--------------
+# Comment the import juste below, uncomment the SECRET_KEY line and paste your secret key
+from .local_settings import SECRET_KEY
+#SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -78,16 +82,17 @@ WSGI_APPLICATION = 'djangoWin.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-
-from .local_settings import *
+#----------------DATABASE-------------------
+# Comment the import juste below, uncomment all the databases variable and fill them with your database informations
+from .local_settings import DATABASES
 # DATABASES = {
 #     'default': {
-#         'ENGINE': "",
+#         'ENGINE': "django.db.backends.mysql",
 #         'NAME': "",
 #         "USER": "",
 #         "PASSWORD": "",
-#         "HOST": "",
-#         "PORT": "",
+#         "HOST": "127.0.0.1",
+#         "PORT": "3306",
 #     }
 # }
 
