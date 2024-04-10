@@ -11,10 +11,12 @@ It includes:
 
 ## Installation requirements
 - Python 3.x.y (https://www.python.org/downloads/)
-  Verify with this command: py --version
+- Verify with this command: py --version
 - Django 5.x (https://docs.djangoproject.com/en/5.0/topics/install/#installing-official-release)
-  Verify with this command: py -m django --version
+- Verify with this command: py -m django --version
 - A database system like MySQL
+- Mysqlclient (https://pypi.org/project/mysqlclient/)
+- Don't forget to setup your environment variables
 
 ## Installation
 ```bash
